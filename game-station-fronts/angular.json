@@ -1,0 +1,124 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "match-five": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/match-five",
+      "sourceRoot": "projects/match-five/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/match-five",
+            "index": "projects/match-five/src/index.html",
+            "main": "projects/match-five/src/main.ts",
+            "polyfills": "projects/match-five/src/polyfills.ts",
+            "tsConfig": "projects/match-five/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/match-five/src/favicon.ico",
+              "projects/match-five/src/assets"
+            ],
+            "styles": [
+              "projects/match-five/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/match-five/src/environments/environment.ts",
+                  "with": "projects/match-five/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "match-five:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "match-five:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "match-five:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/match-five/src/test.ts",
+            "polyfills": "projects/match-five/src/polyfills.ts",
+            "tsConfig": "projects/match-five/tsconfig.spec.json",
+            "karmaConfig": "projects/match-five/karma.conf.js",
+            "assets": [
+              "projects/match-five/src/favicon.ico",
+              "projects/match-five/src/assets"
+            ],
+            "styles": [
+              "projects/match-five/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/match-five/tsconfig.app.json",
+              "projects/match-five/tsconfig.spec.json",
+              "projects/match-five/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/match-five/e2e/protractor.conf.js",
+            "devServerTarget": "match-five:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "match-five:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "match-five"
+}
